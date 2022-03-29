@@ -1,7 +1,7 @@
 # MODIFY ME TO IMPLEMENT YOUR SOLUTION
 # TO PROBLEM 3: DID I WIN TIC-TAC-TOE?
 #
-# NAME:         FIXME
+# NAME:         Julio Arias
 # ASSIGNMENT:   Technical HW: Arrays & Maps
 
 # takes a player character and a 2-dimensional
@@ -15,7 +15,15 @@ def print_2D_board(b):
 
     
 def did_I_win_2D(player, board):
-  
+  for i in range(3):
+    if board[i][0] == player and board[i][1] == player and board[i][2] == player:
+      return True
+    if board[0][i] == player and board[1][i] == player and board[2][i] == player:
+      return True
+    if board[0][0] == player and board[1][1] == player and board[2][2] == player:
+      return True
+    if board[0][2] == player and board[1][1] == player and board[2][0] == player:
+      return True
   return False
 
 

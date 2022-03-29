@@ -1,7 +1,7 @@
 # MODIFY ME TO IMPLEMENT YOUR SOLUTION
 # TO PROBLEM 1: Word Frequency
 #
-# NAME:         FIXME
+# NAME:         Julio Arias
 # ASSIGNMENT:   Technical HW: Arrays & Maps
 
 from operator import itemgetter
@@ -20,7 +20,26 @@ import json
 # Hint: see https://www.techiedelight.com/remove-punctuations-string-python/
 
 def word_frequencies(filename):
+  file = open(filename, 'r')
+  text = file.read().lower()
+  file.close()
+  
+  #remove apostrophes
+  text = text.replace("'","")
+
+
+  #loop though punctuations
+  for c in (string.punctuation + string.digits + "\n"):
+    text = text.replace(c, '')
   d = {}
+
+  #split text and loop words
+  for word in text.split():
+    if word in d:
+      d[word] += 1
+    else:
+      d[word] = 1
+      #return created d
   return d
 
 def print_map_by_value(map):
