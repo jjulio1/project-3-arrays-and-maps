@@ -9,12 +9,17 @@
 # and returns a two-dimensional array multiplication
 # table scaled by the scaling factor.
 # You should not be using any functions other than range.
+
+
 def multiplication_table(w, h, s):
   result = []
+  #sets up the height of the multiplication table
   for i in range(1, h + 1):
     tmp = []
+  #sets up the width of the multiplication table 
     for j in range(1, w + 1):
       tmp.append(i * j * s)
+      
     result.append(tmp)
 
     return result
