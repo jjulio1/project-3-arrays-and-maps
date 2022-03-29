@@ -13,20 +13,24 @@ def print_2D_board(b):
   for i in range(len(b)):
     print(b[i])
 
-    
+#set up winning options for board
 def did_I_win_2D(player, board):
   for i in range(3):
     if board[i][0] == player and board[i][1] == player and board[i][2] == player:
       return True
+      
     if board[0][i] == player and board[1][i] == player and board[2][i] == player:
       return True
+      
     if board[0][0] == player and board[1][1] == player and board[2][2] == player:
       return True
+      
     if board[0][2] == player and board[1][1] == player and board[2][0] == player:
       return True
+      
   return False
 
-
+#give board options to identify winner
 def main():
     boards = [ [["X", "O", "O"]] * 3, \
                [["X", "O", "X"], ["O"] * 3, ["O", "X", "O"]], \
