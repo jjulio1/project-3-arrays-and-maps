@@ -20,26 +20,45 @@ import json
 # Hint: see https://www.techiedelight.com/remove-punctuations-string-python/
 
 def word_frequencies(filename):
-  file = open(filename, 'r')
-  text = file.read().lower()
-  file.close()
-  
-  #remove apostrophes
-  text = text.replace("'","")
-
-
-  #loop though punctuations
-  for c in (string.punctuation + string.digits + "\n"):
-    text = text.replace(c, '')
   d = {}
 
-  #split text and loop words
-  for word in text.split():
-    if word in d:
+  #These are the valis characters
+  chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'’ " 
+  
+  characters = []
+  with open(filename, 'r', encoding='UTF-8') as f:
+    for char in f.read():
+      #Looks for characters and if not found makes it a space
+          characters.append(' ') if char not in chars else characters.append(char) 
+ 
+  info = ''.join(characters)
+  info = info.lower()
+  #Apostrophes must be deleted instead of made into a space
+  info = info.translate(str.maketrans("", "","'’"))
+
+  #Uses accumulator to put letter in until it finds a space
+  word = ''
+  accumulator = ''
+  for letter in info:
+    accumulator += letter
+    if letter == ' ':
+      word = accumulator
+      accumulator = ''
+      word = word.translate(str.maketrans("", "", " "))
+      if word not in d:
+        if word != '':
+          d[word] = 0
+      if word != '':
+        d[word] += 1
+  word = accumulator
+  
+
+  #runs code again to look for skipped spaces
+  if word not in d:
+    if word != '':
+      d[word] = 0
+  if word != '':
       d[word] += 1
-    else:
-      d[word] = 1
-      #return created d
   return d
 
 def print_map_by_value(map):
@@ -49,8 +68,7 @@ def print_map_by_value(map):
 
 def main():
     # files = ["pytest", "turing", "austen"]
-    # files = ["pytest", "turing"]
-    files = ["pytest"] # once this works, try the others!
+    files = ["austen"]
     for f in files:
         print("=" * 10, f, "=" * 10)
         print_map_by_value(word_frequencies("files/"+f+".txt"))

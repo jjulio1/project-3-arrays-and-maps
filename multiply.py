@@ -12,17 +12,26 @@
 
 
 def multiplication_table(w, h, s):
-  result = []
-  #sets up the height of the multiplication table
-  for i in range(1, h + 1):
-    tmp = []
-  #sets up the width of the multiplication table 
-    for j in range(1, w + 1):
-      tmp.append(i * j * s)
-      
-    result.append(tmp)
+    myarray = [ [ 0 for i in range(w)] for i in range(h)]
+    #if the array has no high or wide return None
+    if w==0 or h==0:
+      return None
 
-    return result
+    #multiplies variable in top row by scaling factor and adds value for each row down
+    high = 0
+    while high<h:
+      wide = 0
+      while wide<w:
+          myarray[high][wide]=((wide+1)*s)
+          if high>0:
+            
+              
+              myarray[high][wide]=(myarray[high][wide])+myarray[high-1][wide]
+             
+          wide+=1
+      high+=1
+        
+    return myarray
 
 def print_2D(b):
     for i in range(len(b)):
